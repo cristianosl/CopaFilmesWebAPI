@@ -11,9 +11,13 @@ namespace CopaFilmes.WebAPI.Model
             return filmes.Where(filme => ids.Contains<string>(filme.Id)).ToList();
         }
 
-        public static IOrderedEnumerable<Filme> getOrdenado(this List<Filme> filmes)
+        public static IOrderedEnumerable<Filme> getOrdenacaoTituloAsc(this List<Filme> filmes)
         {
             return filmes.OrderBy(filme => filme.Titulo);
+        }
+        public static IOrderedEnumerable<Filme> getOrdenacaoNotaDesc(this List<Filme> filmes)
+        {
+            return filmes.OrderBy(filme => -filme.Nota);
         }
 
         public static List<Filme> getListDisputa(this List<Filme> filmes)

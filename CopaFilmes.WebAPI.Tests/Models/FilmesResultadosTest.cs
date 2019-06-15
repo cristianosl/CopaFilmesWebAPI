@@ -23,7 +23,7 @@ namespace CopaFilmes.WebAPI.Tests.Models
         private async Task<IOrderedEnumerable<Filme>> selecionarOs8PrimeirosEmOrdemAlfabetica()
         {
             var filmes = await selecionarOs8Primeiros();
-            return filmes.getOrdenado();
+            return filmes.getOrdenacaoTituloAsc();
         }
 
         private async Task<IOrderedEnumerable<Filme>> selecionarFilmesQuartasDeFinais()
