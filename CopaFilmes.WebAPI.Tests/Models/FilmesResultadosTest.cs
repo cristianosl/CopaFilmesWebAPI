@@ -17,7 +17,7 @@ namespace CopaFilmes.WebAPI.Tests.Models
         private async Task<List<Filme>> selecionarOs8Primeiros()
         {
             if (_filmes == null) _filmes = await FilmesDal.getListaFilmes();
-            return _filmes.getByIds(_ids);
+            return _filmes.filtroPorIds(_ids);
         }
 
         private async Task<IOrderedEnumerable<Filme>> selecionarOs8PrimeirosEmOrdemAlfabetica()

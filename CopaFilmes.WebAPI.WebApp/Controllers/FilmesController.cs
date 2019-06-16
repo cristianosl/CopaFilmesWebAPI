@@ -3,7 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using CopaFilmes.WebAPI.DAL;
 using CopaFilmes.WebAPI.Model;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CopaFilmes.WebAPI.WebApp.Controllers
@@ -14,7 +13,6 @@ namespace CopaFilmes.WebAPI.WebApp.Controllers
     {
 
         [HttpGet]
-        [DisableCors]
         public async Task<IActionResult> Get()
         {            
             // Consulta uma lista de filmes
@@ -30,7 +28,7 @@ namespace CopaFilmes.WebAPI.WebApp.Controllers
                 return BadRequest("Não foram recebidos um post com 8 filmes");
             }
             var filmes = await FilmesDal.getListaFilmes();
-            var filmesSelecionados = filmes.getByIds(ids);
+            var filmesSelecionados = filmes.filtroPorIds(ids);
             if (filmesSelecionados.Count() != 8)
             {
                 return BadRequest("Alguns ids recebidos são inválidos ou não foram localizados");
@@ -39,8 +37,10 @@ namespace CopaFilmes.WebAPI.WebApp.Controllers
                .ToList()
                .getListDisputa() // Monta um list com as disputas
                .getListRodada() // Quartas de finais
-               .getListRodada(); // Finais
-            return Ok(filmesFinais.getOrdenacaoNotaDesc());
+               .getListRodada() // Finais
+               .getOrdenacaoNotaDesc();
+            return Ok(filmesFinais);
         }
+
     }
 }

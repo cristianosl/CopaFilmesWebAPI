@@ -6,7 +6,7 @@ namespace CopaFilmes.WebAPI.Model
 {
     public static class FilmeExtensions
     {
-        public static List<Filme> getByIds(this List<Filme> filmes, string[] ids)
+        public static List<Filme> filtroPorIds(this List<Filme> filmes, string[] ids)
         {
             return filmes.Where(filme => ids.Contains<string>(filme.Id)).ToList();
         }
@@ -15,9 +15,9 @@ namespace CopaFilmes.WebAPI.Model
         {
             return filmes.OrderBy(filme => filme.Titulo);
         }
-        public static IOrderedEnumerable<Filme> getOrdenacaoNotaDesc(this List<Filme> filmes)
+        public static List<Filme> getOrdenacaoNotaDesc(this List<Filme> filmes)
         {
-            return filmes.OrderBy(filme => -filme.Nota);
+            return filmes.OrderBy(filme => -filme.Nota).ToList();
         }
 
         public static List<Filme> getListDisputa(this List<Filme> filmes)
@@ -47,6 +47,12 @@ namespace CopaFilmes.WebAPI.Model
             return filmesRodada;
         }
 
+        /// <summary>
+        /// Compara os dois filmes e retorna o que estiver com a melhor pontuação
+        /// </summary>
+        /// <param name="primeiro"></param>
+        /// <param name="segundo"></param>
+        /// <returns></returns>
         public static Filme getVencedor(Filme primeiro, Filme segundo)
         {
             Filme filmeGanhador;
